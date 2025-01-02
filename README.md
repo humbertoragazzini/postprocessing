@@ -50,3 +50,9 @@ To clone de repository follow this steps:
 ![clone repository](design/animation/clone/clone.gif)
 
 ## **To run this project base on VITE**
+
+3.  1.a) Execute in the terminal: npm run install
+
+    1.b) After installing all the packages run: npm run dev
+
+You need to have nodejs and npm installed in the host pc.
