@@ -20,11 +20,11 @@ This is a simple example of postproccesing effect applied with THREEJS: [Postpro
 
 1. Go to my github main page and login in.
 
-2. Select the repository, in this case :[Git Hub Repository](https://github.com/humbertoragazzini/thewebglglobe).
+2. Select the repository, in this case: [Git Hub Repository](https://github.com/humbertoragazzini/postprocessing).
 3. In this tab select settings.
 4. Click in pages in the option menu.
 5. Select in source branch master.
-6. Save, the project is deployed in github pages in the following link:[Postproccesing](https://humbertoragazzini.github.io/postprocessing/dist/)
+6. Save, the project is deployed in github pages in the following link: [Postproccesing](https://humbertoragazzini.github.io/postprocessing/dist/)
 
 ## **To clone my repository in github**
 
