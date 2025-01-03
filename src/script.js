@@ -3,6 +3,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import GUI from "lil-gui";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+
 /**
  * Base
  */
@@ -135,7 +137,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const effectComposer = new EffectComposer(renderer);
 effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+effectComposer.setSize(sizes.width, sizes.height);
 
+const renderPass = new RenderPass(scene, camera);
 /**
  * Animate
  */
