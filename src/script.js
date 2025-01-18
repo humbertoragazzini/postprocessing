@@ -4,7 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import GUI from "lil-gui";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-
+import { DotScreenPass } from "three/examples/jsm/postprocessing/DotScreenPass.js";
 /**
  * Base
  */
@@ -140,6 +140,12 @@ effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 effectComposer.setSize(sizes.width, sizes.height);
 
 const renderPass = new RenderPass(scene, camera);
+effectComposer.addPass(renderPass);
+
+const dotScreenPass = new DotScreenPass();
+dotScreenPass.enabled = false;
+effectComposer.addPass(dotScreenPass);
+
 /**
  * Animate
  */
@@ -152,8 +158,8 @@ const tick = () => {
     controls.update();
 
     // Render
-    renderer.render(scene, camera);
-
+    //renderer.render(scene, camera);
+    effectComposer.render();
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
 };
