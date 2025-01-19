@@ -159,7 +159,7 @@ const rgbShiftPass = new ShaderPass(RGBShiftShader);
 effectComposer.addPass(rgbShiftPass);
 
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
-effectComposer.addPass(rgbShiftPass);
+effectComposer.addPass(gammaCorrectionPass);
 
 /**
  * Animate
