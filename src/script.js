@@ -9,7 +9,7 @@ import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
 import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
-
+import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass.js";
 /**
  * Base
  */
@@ -181,6 +181,9 @@ const rgbShiftPass = new ShaderPass(RGBShiftShader);
 
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
 effectComposer.addPass(gammaCorrectionPass);
+
+const smaaPass = new SMAAPass();
+effectComposer.addPass(smaaPass);
 
 /**
  * Animate
