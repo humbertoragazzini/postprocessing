@@ -139,11 +139,22 @@ renderer.toneMappingExposure = 1.5;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+const getPixelRatio = () => {
+    const pixelRatio = renderer.getPixelRatio();
+    if (pixelRatio < 2) {
+        console.log("Pixel ratio on true", pixelRatio);
+        return true;
+    } else {
+        console.log("Pixel ratio on false", pixelRatio);
+        return false;
+    }
+};
+
 /*
  * Render Target
  */
 const renderTarget = new THREE.WebGLRenderTarget(800, 600, {
-    samples: 2,
+    samples: getPixelRatio() ? 0 : 2,
 });
 
 /*
