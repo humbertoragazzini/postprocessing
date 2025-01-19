@@ -150,6 +150,10 @@ const getPixelRatio = () => {
     }
 };
 
+const getWebGLVersion = () => {
+    return rederer.capabilities.isWebGL2;
+};
+
 /*
  * Render Target
  */
@@ -183,8 +187,10 @@ const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
 effectComposer.addPass(gammaCorrectionPass);
 
 const smaaPass = new SMAAPass();
-effectComposer.addPass(smaaPass);
 
+if (getPixelRatio && !getWebGLVersion) {
+    effectComposer.addPass(smaaPass);
+}
 /**
  * Animate
  */
