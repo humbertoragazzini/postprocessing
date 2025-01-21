@@ -190,16 +190,23 @@ const rgbShiftPass = new ShaderPass(RGBShiftShader);
 
 // Tint shader to make a custom pass we create a shader and then we send it as a pass to the composer
 const TintShader = {
-    uniforms: {},
+    uniforms: {
+        tDiffuse: { value: null },
+    },
     vertexShader: `
+        varying vec2 vUv;
         void main(){
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
         }
     `,
     fragmentShader: `
+        uniform sampler2D tDiffuse; 
+        varying vec2 vUv;
         void main(){
-        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-    }
+            vec4 color = texture2D(tDiffuse, vUv);
+            gl_FragColor = color;
+        }
     `,
 };
 
