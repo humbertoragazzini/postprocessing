@@ -188,6 +188,17 @@ effectComposer.addPass(glitchPass);
 const rgbShiftPass = new ShaderPass(RGBShiftShader);
 //effectComposer.addPass(rgbShiftPass);
 
+// Tint shader to make a custom pass we create a shader and then we send it as a pass to the composer
+const TintShader = {
+    uniforms: {},
+    vertexShader: ``,
+    fragmentShader: ``,
+};
+
+const tintPass = new ShaderPass(TintShader);
+effectComposer.addPass(tintPass);
+
+// This is the gamma correction pass, because we are using effectComposer the color need to be converted to lineal, the gamma correction pass make this with a custom shader
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
 effectComposer.addPass(gammaCorrectionPass);
 
