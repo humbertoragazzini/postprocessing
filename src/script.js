@@ -7,6 +7,7 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { DotScreenPass } from "three/examples/jsm/postprocessing/DotScreenPass.js";
 import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
 import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
 import { SMAAPass } from "three/examples/jsm/postprocessing/SMAAPass.js";
@@ -176,8 +177,12 @@ const dotScreenPass = new DotScreenPass();
 dotScreenPass.enabled = false;
 effectComposer.addPass(dotScreenPass);
 
+const unrealBloomPass = new UnrealBloomPass();
+unrealBloomPass.enabled = true;
+effectComposer.addPass(unrealBloomPass);
+
 const glitchPass = new GlitchPass();
-glitchPass.enabled = true;
+glitchPass.enabled = false;
 effectComposer.addPass(glitchPass);
 
 const rgbShiftPass = new ShaderPass(RGBShiftShader);
