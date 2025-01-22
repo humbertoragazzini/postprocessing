@@ -215,6 +215,37 @@ const TintShader = {
 
 const tintPass = new ShaderPass(TintShader);
 tintPass.material.uniforms.uTint.value = new THREE.Vector3(0.5, 0.0, 0.5);
+
+//Displacement custom pass
+
+const TintShader = {
+    uniforms: {
+        tDiffuse: { value: null },
+        uTint: { value: null },
+    },
+    vertexShader: `
+        varying vec2 vUv;
+        void main(){
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
+        }
+    `,
+    fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform vec3 uTint; 
+        varying vec2 vUv;
+        void main(){
+            vec4 color = texture2D(tDiffuse, vUv);
+            color.rgb += uTint;
+            gl_FragColor = color;
+        }
+    `,
+};
+
+const tintPass = new ShaderPass(TintShader);
+tintPass.material.uniforms.uTint.value = new THREE.Vector3(0.5, 0.0, 0.5);
+
+// gui to tweak the uniforms of the custom passes
 gui.add(tintPass.material.uniforms.uTint.value, "x")
     .min(-1)
     .max(1)
