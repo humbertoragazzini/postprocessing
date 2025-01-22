@@ -214,36 +214,7 @@ const TintShader = {
 };
 
 const tintPass = new ShaderPass(TintShader);
-tintPass.material.uniforms.uTint.value = new THREE.Vector3(0.5, 0.0, 0.5);
-
-//Displacement custom pass
-
-const TintShader = {
-    uniforms: {
-        tDiffuse: { value: null },
-        uTint: { value: null },
-    },
-    vertexShader: `
-        varying vec2 vUv;
-        void main(){
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-            vUv = uv;
-        }
-    `,
-    fragmentShader: `
-        uniform sampler2D tDiffuse;
-        uniform vec3 uTint; 
-        varying vec2 vUv;
-        void main(){
-            vec4 color = texture2D(tDiffuse, vUv);
-            color.rgb += uTint;
-            gl_FragColor = color;
-        }
-    `,
-};
-
-const tintPass = new ShaderPass(TintShader);
-tintPass.material.uniforms.uTint.value = new THREE.Vector3(0.5, 0.0, 0.5);
+tintPass.material.uniforms.uTint.value = new THREE.Vector3(0, 0, 0);
 
 // gui to tweak the uniforms of the custom passes
 gui.add(tintPass.material.uniforms.uTint.value, "x")
@@ -262,6 +233,34 @@ gui.add(tintPass.material.uniforms.uTint.value, "z")
     .step(0.001)
     .name("blue");
 effectComposer.addPass(tintPass);
+
+//Displacement custom pass
+
+const DisplacementPassShader = {
+    uniforms: {
+        tDiffuse: { value: null },
+    },
+    vertexShader: `
+        varying vec2 vUv;
+        void main(){
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
+        }
+    `,
+    fragmentShader: `
+        uniform sampler2D tDiffuse;
+        varying vec2 vUv;
+        void main(){
+            vec2 newUv = vUv;
+            newUv.y += 0.2;
+            vec4 color = texture2D(tDiffuse, newUv);
+            gl_FragColor = color;
+        }
+    `,
+};
+
+const displacementPass = new ShaderPass(DisplacementPassShader);
+effectComposer.addPass(displacementPass);
 
 // This is the gamma correction pass, because we are using effectComposer the color need to be converted to lineal, the gamma correction pass make this with a custom shader
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
