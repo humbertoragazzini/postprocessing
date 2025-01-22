@@ -264,6 +264,7 @@ const DisplacementPassShader = {
 };
 
 const displacementPass = new ShaderPass(DisplacementPassShader);
+displacementPass.material.uniforms.uTime.value = 0;
 effectComposer.addPass(displacementPass);
 
 // This is the gamma correction pass, because we are using effectComposer the color need to be converted to lineal, the gamma correction pass make this with a custom shader
@@ -285,7 +286,7 @@ const tick = () => {
 
     // Update controls
     controls.update();
-
+    displacementPass.material.uniforms.uTime.value = elapsedTime;
     // Render
     //renderer.render(scene, camera);
     effectComposer.render();
