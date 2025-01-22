@@ -236,7 +236,8 @@ effectComposer.addPass(tintPass);
 
 //Displacement custom pass
 
-const DisplacementPassShader = {
+//Drunk
+const DrunkDisplacementPassShader = {
     uniforms: {
         tDiffuse: { value: null },
         uTime: { value: null },
@@ -263,9 +264,37 @@ const DisplacementPassShader = {
     `,
 };
 
-const displacementPass = new ShaderPass(DisplacementPassShader);
-displacementPass.material.uniforms.uTime.value = 0;
-effectComposer.addPass(displacementPass);
+const drunkDisplacementPass = new ShaderPass(DrunkDisplacementPassShader);
+drunkDisplacementPass.material.uniforms.uTime.value = 0;
+effectComposer.addPass(drunkDisplacementPass);
+
+//Visor
+
+const VisorDisplacementPassShader = {
+    uniforms: {
+        tDiffuse: { value: null },
+    },
+    vertexShader: `
+        varying vec2 vUv;
+        void main(){
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
+        }
+    `,
+    fragmentShader: `
+        uniform sampler2D tDiffuse;
+        uniform float uTime;
+        varying vec2 vUv;
+        void main(){
+            vec2 newUv = vUv;
+            vec4 color = texture2D(tDiffuse, newUv);
+            gl_FragColor = color;
+        }
+    `,
+};
+
+const visorDisplacementPass = new ShaderPass(VisorDisplacementPassShader);
+effectComposer.addPass(visorDisplacementPass);
 
 // This is the gamma correction pass, because we are using effectComposer the color need to be converted to lineal, the gamma correction pass make this with a custom shader
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
@@ -286,7 +315,7 @@ const tick = () => {
 
     // Update controls
     controls.update();
-    displacementPass.material.uniforms.uTime.value = elapsedTime;
+    drunkDisplacementPass.material.uniforms.uTime.value = elapsedTime;
     // Render
     //renderer.render(scene, camera);
     effectComposer.render();
