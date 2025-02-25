@@ -1,6 +1,6 @@
 # Postproccesing MiniProject - Humberto Ragazzini
 
-This is a simple example of postproccesing effect applied with THREEJS: [Postproccesing](https://humbertoragazzini.github.io/postprocessing/dist/)
+This is a simple example of postproccesing effect applied with THREEJS: [Postproccesing](https://humbertoragazzini.github.io/postprocessing/)
 
 # **Frameworks and Tecnologies**
 
@@ -24,7 +24,7 @@ This is a simple example of postproccesing effect applied with THREEJS: [Postpro
 3. In this tab select settings.
 4. Click in pages in the option menu.
 5. Select in source branch master.
-6. Save, the project is deployed in github pages in the following link: [Postproccesing](https://humbertoragazzini.github.io/postprocessing/dist/)
+6. Save, the project is deployed in github pages in the following link: [Postproccesing](https://humbertoragazzini.github.io/postprocessing/)
 
 ## **To clone my repository in github**
 
