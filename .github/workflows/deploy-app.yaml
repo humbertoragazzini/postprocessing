@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm install --frozen-lockfile
       - name: Build Project
-        run: npm run Build
+        run: npm run build
       - name: Check Files
         run: ls -al
       - name: Deply to Github Pages
